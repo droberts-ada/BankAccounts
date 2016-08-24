@@ -37,7 +37,7 @@ Create an `Account` class which should have the following functionality:
 - Add an `owner` property to each Account to track information about who owns the account.
   - The `Account` can be created with an `owner`, OR you can create a method that will add the `owner` after the `Account` has already been created.
 
-<!--
+
 ## Wave 2
 
 ### Learning Goals
@@ -80,6 +80,7 @@ Create an `Account` class which should have the following functionality:
     **Account ID** - (Fixnum) a unique identifier corresponding to an account
     **Owner ID** - (Fixnum) a unique identifier corresponding to an owner
 
+<!--
 ## Wave 3
 ### Learning Goals
 - Use inheritance to share some behavior across classes
