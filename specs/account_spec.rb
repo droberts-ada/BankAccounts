@@ -137,7 +137,7 @@ describe "Wave 1" do
 end
 
 # TODO: change 'xdescribe' to 'describe' to run these tests
-xdescribe "Wave 2" do
+describe "Wave 2" do
   describe "Account.all" do
     it "Returns an array of all accounts" do
       # TODO: Your test code here!
@@ -148,24 +148,50 @@ xdescribe "Wave 2" do
       #   - The ID and balance of the first and last
       #       accounts match what's in the CSV file
       # Feel free to split this into multiple tests if needed
+      expect(Bank::Account.all.class).must_equal Array, "Ops, an array is not returned"
+      Bank::Account.all.each do |acc|
+        if acc.class != Bank::Account
+          puts "Ops, everything int eh array is NOT an Account"
+        # else
+        #   puts "OK :)"
+        end
+      end
+      # expect(Bank::Account.all.length).must_equal CSV.open("./support/accounts.csv").read.length, "Ops, the array does not returnall accounts"
+      expect(Bank::Account.all.length).must_equal 12, "Ops, the array does not returnall accounts"
+      # Check id
+      expect(Bank::Account.all.first.id).must_equal 1212, "First id does not match up"
+      expect(Bank::Account.all.last.id).must_equal 15156, "Last id does not match up"
+      # Check balance
+      expect(Bank::Account.all.first.balance).must_equal 1235667, "First balance does not match up"
+      expect(Bank::Account.all.last.balance).must_equal 4356772, "Last balance does not match up"
+
     end
   end
 
   describe "Account.find" do
     it "Returns an account that exists" do
-      # TODO: Your test code here!
+      # TODO: Your test code here
+      expect(Bank::Account.find(15151).class).must_equal Bank::Account, "Does not return a Account object"
     end
 
     it "Can find the first account from the CSV" do
       # TODO: Your test code here!
+      first_account = Bank::Account.find(1212)
+      expect(first_account.id).must_equal 1212, "Can't find the first account"
     end
 
     it "Can find the last account from the CSV" do
       # TODO: Your test code here!
+      last_account = Bank::Account.find(15156)
+      expect(last_account.id).must_equal 15156, "Can't find the last account"
+
     end
 
     it "Raises an error for an account that doesn't exist" do
       # TODO: Your test code here!
+      proc {
+        Bank::Account.find(1)
+      }.must_raise ArgumentError
     end
   end
 end
