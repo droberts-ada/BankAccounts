@@ -151,13 +151,14 @@ describe "Wave 2" do
       expect(Bank::Account.all.class).must_equal Array, "Ops, an array is not returned"
       Bank::Account.all.each do |acc|
         if acc.class != Bank::Account
-          puts "Ops, everything int eh array is NOT an Account"
+          puts "Ops, everything in the array is NOT an Account"
         # else
         #   puts "OK :)"
         end
       end
-      # expect(Bank::Account.all.length).must_equal CSV.open("./support/accounts.csv").read.length, "Ops, the array does not returnall accounts"
-      expect(Bank::Account.all.length).must_equal 12, "Ops, the array does not returnall accounts"
+
+      # Check number of accounts
+      expect(Bank::Account.all.length).must_equal 12, "Ops, the array does not return all accounts"
       # Check id
       expect(Bank::Account.all.first.id).must_equal 1212, "First id does not match up"
       expect(Bank::Account.all.last.id).must_equal 15156, "Last id does not match up"

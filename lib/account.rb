@@ -10,24 +10,22 @@ module Bank
     end
 
     def self.all
-      @all_accounts = []
+      all_accounts = []
       CSV.open("./support/accounts.csv").each do |acc|
-        @all_accounts << self.new(acc[0].to_i, acc[1].to_f)
+        all_accounts << self.new(acc[0].to_i, acc[1].to_f)
       end
-      return @all_accounts
+      return all_accounts
     end
 
-
     def self.find(id)
-      all_accounts = self.all
-      to_be_returned = nil
-      all_accounts.each do |acc|
+      found_account = nil
+      self.all.each do |acc|
         if acc.id == id
-          to_be_returned = acc
+          found_account = acc
         end
       end
-      raise ArgumentError.new "Account does not exist" if to_be_returned == nil
-      return to_be_returned
+      raise ArgumentError.new "Account does not exist" if found_account == nil
+      return found_account
     end
 
 
