@@ -14,6 +14,7 @@ module Bank
       if amount < 0
         raise ArgumentError.new("withdrawal can't be negative number.")
       end
+
       if amount > @balance
         puts "Overdrawn"
         @balance
@@ -46,6 +47,5 @@ module Bank
       end
       raise ArgumentError.new('Account does not exist')
     end
-
   end
 end
