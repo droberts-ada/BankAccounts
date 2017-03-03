@@ -3,11 +3,12 @@ require "csv" # one require files. Use file name without .rb
 module Bank
   class Account
     attr_reader :id, :balance, :open_date
-    def initialize(id, balance, open_date = nil)
+    def initialize(id, balance, open_date = nil, minimum_balance = 0)
       raise ArgumentError.new("The balance must be >= 0") if balance < 0
       @id = id
       @balance = balance
       @open_date = open_date
+      @minimum_balance = minimum_balance
     end
 
     def self.all
@@ -33,9 +34,9 @@ module Bank
     def withdraw(amount)
       # TODO: implement withdraw
       raise ArgumentError.new("Withdrawal amount must be > 0") if amount < 0
-      if amount > @balance
+      if @balance - amount < @minimum_balance
         print "Withdrawal denied. The amount is bigger than your account balance"
-      elsif amount <= @balance
+      else
         @balance -= amount
       end
       return @balance
